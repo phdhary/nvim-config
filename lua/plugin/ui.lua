@@ -23,14 +23,21 @@ return {
 		},
 	},
   -- stylua: ignore
-  {
-    "iamcco/markdown-preview.nvim", -- view markdown files in browser
-    version = "*",
-    keys = { { "<leader>mp", vim.cmd.MarkdownPreviewToggle } },
-    ft =  "markdown",
-    build = function() vim.fn["mkdp#util#install"]() end,
-    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
-  },
+	{
+		"iamcco/markdown-preview.nvim", -- view markdown files in browser
+		version = "*",
+		keys = { { "<leader>mp", vim.cmd.MarkdownPreviewToggle } },
+		ft = "markdown",
+		build = function() vim.fn["mkdp#util#install"]() end,
+		init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+		config = function()
+			vim.cmd [[ 
+      function OpenMarkdownPreview (url)
+        execute "silent ! firefox --new-window " . a:url
+      endfunction
+      let g:mkdp_browserfunc = 'OpenMarkdownPreview']]
+		end,
+	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		version = "v2.*",
