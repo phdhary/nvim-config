@@ -20,13 +20,6 @@ local spec = {
 				min_window_height = 15, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
 			},
 		},
-		{
-			"Wansmer/treesj",
-			config = function()
-				require("treesj").setup { use_default_keymaps = false }
-				vim.keymap.set("n", "<leader>j", vim.cmd.TSJToggle, {})
-			end,
-		},
 	},
 }
 
