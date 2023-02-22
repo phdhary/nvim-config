@@ -55,7 +55,18 @@ return {
 		keys = harpoon_keys,
 		config = function()
 			require("harpoon").setup {
-				menu = { borderchars = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" } },
+				menu = {
+					borderchars = {
+						Config.border[2],
+						Config.border[4],
+						Config.border[6],
+						Config.border[8],
+						Config.border[1],
+						Config.border[3],
+						Config.border[5],
+						Config.border[7],
+					},
+				},
 			}
 		end,
 	},

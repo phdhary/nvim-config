@@ -54,14 +54,14 @@ function spec.config()
 				-- the border that is used for the hover window
 				-- see vim.api.nvim_open_win()
 				border = {
-					{ "🭽", "FloatBorder" },
-					{ "▔", "FloatBorder" },
-					{ "🭾", "FloatBorder" },
-					{ "▕", "FloatBorder" },
-					{ "🭿", "FloatBorder" },
-					{ "▁", "FloatBorder" },
-					{ "🭼", "FloatBorder" },
-					{ "▏", "FloatBorder" },
+					{ Config.border[1], "FloatBorder" },
+					{ Config.border[2], "FloatBorder" },
+					{ Config.border[3], "FloatBorder" },
+					{ Config.border[4], "FloatBorder" },
+					{ Config.border[5], "FloatBorder" },
+					{ Config.border[6], "FloatBorder" },
+					{ Config.border[7], "FloatBorder" },
+					{ Config.border[8], "FloatBorder" },
 				},
 				-- Maximal width of the hover window. Nil means no max.
 				max_width = nil,
