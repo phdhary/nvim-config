@@ -26,7 +26,10 @@ local i = ls.insert_node
 
 ls.add_snippets("lua", {
 	-- for adding lazy plugins
-	s("lpc", {
+	s({
+		trig = "lpc",
+		dscr = "lazy plugin config",
+	}, {
 		t { "{", "" },
 		isn(1, {
 			t '  "',
@@ -37,7 +40,10 @@ ls.add_snippets("lua", {
 		}, "  "),
 		t { "", "}" },
 	}),
-	s("lpo", {
+	s({
+		trig = "lpo",
+		dscr = "lazy plugin opts",
+	}, {
 		t { "{", "" },
 		isn(1, {
 			t '  "',
