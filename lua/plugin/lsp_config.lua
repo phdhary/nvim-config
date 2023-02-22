@@ -133,6 +133,8 @@ function spec.config()
 					lspconfig.util.root_pattern("tailwind.config.cjs", "tailwind.config.js", "postcss.config.js")
 				return root_pattern(fname)
 			end
+		elseif lsp == "marksman" then
+			opts.filetypes = { "markdown", "vimwiki" }
 		end
 		lspconfig[lsp].setup(opts)
 	end
