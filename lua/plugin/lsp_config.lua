@@ -128,6 +128,11 @@ function spec.config()
 				"vue",
 				"svelte",
 			}
+			opts.root_dir = function(fname)
+				local root_pattern =
+					lspconfig.util.root_pattern("tailwind.config.cjs", "tailwind.config.js", "postcss.config.js")
+				return root_pattern(fname)
+			end
 		end
 		lspconfig[lsp].setup(opts)
 	end
