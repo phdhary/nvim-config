@@ -54,4 +54,8 @@ ls.add_snippets("lua", {
 		}, "  "),
 		t { "", "}" },
 	}),
+	s({
+		trig = "sty",
+		dscr = "stylua ignore",
+	}, { t { "-- stylua: ignore" } }),
 })
