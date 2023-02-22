@@ -1,3 +1,4 @@
+pcall(vim.cmd.IndentBlanklineDisable)
 UserUtils.apply_mapping_table {
 	n = {
 		["<C-v>"] = { "<Plug>fugitive:gO", { buffer = true } },
