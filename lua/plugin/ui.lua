@@ -57,7 +57,11 @@ return {
 		event = "BufRead",
 		opts = {
 			hide = { cursorline = true, focused_win = false, only_win = true },
-			window = { padding = 0, margin = { horizontal = 0, vertical = 1 } },
+			window = {
+				padding = 0,
+				margin = { horizontal = 0, vertical = 1 },
+				zindex = 2,
+			},
 			render = function(props)
 				local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":~:.") -- :t
 				if filename:match "^fugitive" then
