@@ -1,6 +1,20 @@
 return {
 	{ "fladson/vim-kitty", ft = "kitty" },
-	{ "vigoux/notifier.nvim", event = "VeryLazy", config = true },
+	{
+		"vigoux/notifier.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("notifier").setup()
+			local vim_notify = vim.notify
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.notify = function(msg, level, opts)
+				if msg == "No information available" then
+					return
+				end
+				return vim_notify(msg, level, opts)
+			end
+		end,
+	},
 	{
 		"mbbill/undotree",
 		keys = { { "<leader>u", vim.cmd.UndotreeToggle } },
