@@ -19,9 +19,6 @@ UserUtils.apply_mapping_table {
 	n = {
 		["<C-j>"] = { "<CMD>cnext|wincmd j<CR>", opts },
 		["<C-k>"] = { "<CMD>cprev|wincmd j<CR>", opts },
-		-- ["<C-v>"] = { "", opts },
-		-- ["<C-x>"] = { "", opts },
-		-- ["<C-t>"] = { "", opts },
 		["<CR>"] = { "<CR><CMD>cclose<CR>", opts },
 		q = { "<CMD>cclose<CR>", opts },
 		o = { "<CR>", opts },

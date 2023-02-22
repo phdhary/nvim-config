@@ -50,7 +50,6 @@ function spec.config()
 	}
 
 	local dap = require "dap"
-	local dap_widgets = require "dap.ui.widgets"
 	Hydra {
 		name = "debug mode",
 		hint = [[
@@ -70,12 +69,7 @@ _<C-e>_exit]],
 		config = {
 			invoke_on_body = true,
 			color = "pink",
-			hint = {
-				show_name = false,
-				type = "window",
-				position = "middle-right",
-				border = Config.border,
-			},
+			hint = { show_name = false, type = "window", position = "middle-right", border = Config.border },
 		},
 		mode = "n",
 		body = "<leader>db",
@@ -94,28 +88,10 @@ _<C-e>_exit]],
 			{ "T", dap.clear_breakpoints },
 			{ "o", cmd "Telescope dap commands", { exit = true } },
 			{ "<C-e>", nil, { exit = true, nowait = true } },
-      { "gh", dap_widgets.hover },
-      { "<Up>", dap.up },
-      { "<Down>", dap.down },
-      { "u", require("dapui").toggle },
-			-- {
-			-- 	"s",
-			-- 	function()
-			-- 		dap_widgets.centered_float(dap_widgets.scopes)
-			-- 	end,
-			-- },
-			-- {
-			-- 	"f",
-			-- 	function()
-			-- 		dap_widgets.cursor_float(dap_widgets.frames)
-			-- 	end,
-			-- },
-			-- {
-			-- 	"e",
-			-- 	function()
-			-- 		dap_widgets.cursor_float(dap_widgets.expression)
-			-- 	end,
-			-- },
+			{ "gh", require("dap.ui.widgets").hover },
+			{ "<Up>", dap.up },
+			{ "<Down>", dap.down },
+			{ "u", require("dapui").toggle },
 		},
 	}
 

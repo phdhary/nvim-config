@@ -82,7 +82,6 @@ UserUtils.kitty.map_colorscheme_with_kitty = {
 	ayu = { kitty_dark_theme = "Ayu Mirage", kitty_light_theme = "Ayu Light" },
 	["rose-pine"] = { kitty_dark_theme = "Rosé Pine", kitty_light_theme = "Rosé Pine Dawn" },
 	kanagawa = { kitty_dark_theme = "Kanagawa", kitty_light_theme = "Kanagawa_light" },
-	vscode = { kitty_dark_theme = "Vscode-dark", kitty_light_theme = "Vscode-light" },
 	rosebones = { kitty_dark_theme = "Rosé Pine", kitty_light_theme = "Rosé Pine Dawn" },
 	tokyobones = { kitty_dark_theme = "Tokyo Night Moon", kitty_light_theme = "Tokyo Night Day" },
 	vimbones = { kitty_dark_theme = "", kitty_light_theme = "vimbones" },
@@ -106,9 +105,9 @@ end
 
 function UserUtils.fugitive.get_sid(file)
 	file = file or "autoload/fugitive.vim"
-	local script_entry = vim.api.nvim_exec("filter #vim-fugitive/" .. file .. "# scriptnames", true)
-	local trimmed = string.gsub(script_entry, "^%s*(.-)%s*$", "%1")
-	return tonumber(trimmed:match "^(%d+)")
+	file = vim.api.nvim_exec("filter #vim-fugitive/" .. file .. "# scriptnames", true)
+	file = string.gsub(file, "^%s*(.-)%s*$", "%1")
+	return tonumber(file:match "^(%d+)")
 end
 
 function UserUtils.fugitive:get_info_under_cursor()
@@ -119,90 +118,68 @@ end
 
 function UserUtils.hydra.git(invoke_on_body)
 	local Hydra = require "hydra"
-	-- local cmd = require("hydra.keymap-util").cmd
 	local gitsigns = require "gitsigns"
 	local opts = {
 		name = "git mode",
 		hint = [[_J_:next-hunk  _K_:prev-hunk  _S_tage-buffer  _s_tage-hunk  _u_ndo-stage  _p_review  toggle-_d_eleted  _b_lame  _B_lame-full  _r_eset-hunk  _<C-e>_exit]],
 		config = {
 			color = "pink",
-			hint = {
-				type = "cmdline",
-				show_name = false,
-			},
+			hint = { type = "cmdline", show_name = false },
       -- stylua: ignore
       on_key = function() vim.wait(50) end,
-			-- on_enter = function()
-			-- vim.cmd "mkview"
-			-- end,
-			on_exit = function()
-				-- vim.cmd "loadview"
-				-- gitsigns.toggle_linehl(false)
-				gitsigns.toggle_deleted(false)
-			end,
+      -- stylua: ignore
+			on_exit = function() gitsigns.toggle_deleted(false) end,
 		},
 		mode = { "n", "x" },
 		heads = {
 			{
 				"J",
+        -- stylua: ignore
 				function()
-					if vim.wo.diff then
-						return "]c"
-					end
-					vim.schedule(function()
-						gitsigns.next_hunk()
-					end)
+					if vim.wo.diff then return "]c" end
+					vim.schedule(function() gitsigns.next_hunk() end)
 					return "<Ignore>"
 				end,
-				{ expr = true, desc = "↑ hunk" },
 			},
 			{
 				"K",
+        -- stylua: ignore
 				function()
-					if vim.wo.diff then
-						return "[c"
-					end
-					vim.schedule(function()
-						gitsigns.prev_hunk()
-					end)
+					if vim.wo.diff then return "[c" end
+					vim.schedule(function() gitsigns.prev_hunk() end)
 					return "<Ignore>"
 				end,
-				{ expr = true, desc = "↓ hunk" },
 			},
 			{
 				"s",
 				function()
 					local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
-					if mode == "V" then -- visual-line mode
+					if mode == "V" then
 						local esc = vim.api.nvim_replace_termcodes(":", true, true, true)
-						vim.api.nvim_feedkeys(esc, "x", false) -- exit visual mode
+						vim.api.nvim_feedkeys(esc, "x", false)
 						vim.cmd "'<,'>Gitsigns stage_hunk"
 					else
 						vim.cmd "Gitsigns stage_hunk"
 					end
 				end,
-				{ desc = "stage hunk" },
 			},
-			{ "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
-			{ "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
-			{ "p", gitsigns.preview_hunk, { desc = " " } },
-			{ "d", gitsigns.toggle_deleted, { nowait = true, desc = "toggle deleted" } },
-			{ "b", gitsigns.blame_line, { desc = "blame" } },
+			{ "u", gitsigns.undo_stage_hunk },
+			{ "S", gitsigns.stage_buffer },
+			{ "p", gitsigns.preview_hunk },
+			{ "d", gitsigns.toggle_deleted, { nowait = true } },
+			{ "b", gitsigns.blame_line },
       -- stylua: ignore
-      { "B", function() gitsigns.blame_line { full = true } end, { desc = "blame show" } },
-      { "r", gitsigns.reset_hunk, { desc = "reset hunk" } },
-			-- { "g", cmd "G", { exit = true, nowait = true, desc = "󰊢 " } },
-			-- { "c", cmd "G commit", { exit = true, nowait = true, desc = " " } },
-			{ "<C-e>", nil, { exit = true, nowait = true, desc = " " } },
+      { "B", function() gitsigns.blame_line { full = true } end  },
+			{ "r", gitsigns.reset_hunk },
+			{ "<C-e>", nil, { exit = true, nowait = true } },
 		},
 	}
 
 	if invoke_on_body then
 		opts.body = "<leader>gm"
 		opts.config.invoke_on_body = true
-		opts.config.on_enter = function()
-			gitsigns.toggle_linehl(true)
-		end
+    -- stylua: ignore
+		opts.config.on_enter = function() gitsigns.toggle_linehl(true) end
 		opts.config.on_exit = function()
 			gitsigns.toggle_linehl(false)
 			gitsigns.toggle_deleted(false)

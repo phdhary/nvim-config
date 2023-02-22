@@ -23,24 +23,18 @@ local user_commands = {
 				end
 			end
 		end,
-		opts = {
-			desc = "close fugitive diff",
-		},
+		opts = { desc = "close fugitive diff" },
 	},
 	QuickfixToggle = {
 		command = function()
 			local current_tab_detail = UserUtils.get_current_tab_detail()
 			for _, tbl in pairs(current_tab_detail) do
-				if tbl.ft == "qf" then
-					vim.cmd.cclose()
-					return
-				end
+        -- stylua: ignore
+				if tbl.ft == "qf" then vim.cmd.cclose() return end
 			end
 			vim.cmd.copen()
 		end,
-		opts = {
-			desc = "toggle quickfix",
-		},
+		opts = { desc = "toggle quickfix" },
 	},
 }
 

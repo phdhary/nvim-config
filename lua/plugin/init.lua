@@ -18,5 +18,4 @@ return {
 			vim.g.tmux_navigator_disable_when_zoomed = 1
 		end,
 	},
-	-- "tpope/vim-vinegar",
 }

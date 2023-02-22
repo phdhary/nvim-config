@@ -13,7 +13,7 @@ local opts = {
 		refresh = { statusline = 10, tabline = 10, winbar = 10 },
 	},
 	sections = {},
-	extensions = { "man", "nvim-dap-ui" },
+	extensions = { "man" },
 }
 
 local function is_more_than_minimal_width()

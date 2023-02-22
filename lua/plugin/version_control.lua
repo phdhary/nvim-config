@@ -2,7 +2,6 @@ return {
 	{
 		"tpope/vim-fugitive",
 		event = "VeryLazy",
-		-- lazy = false,
 		config = function()
 			vim.g.fugitive_summary_format = "(%an)\t%s"
 		end,
@@ -60,8 +59,6 @@ return {
 					view = { { "n", "q", require("diffview.actions").close, { desc = "close diffview" } } },
 					file_panel = {
 						{ "n", "q", require("diffview.actions").close, { desc = "close diffview" } },
-						-- { "n", "s", require("diffview.actions").toggle_stage_entry, { desc = "stage entry" } },
-						-- { "n", "<tab>", require("diffview.actions").select_entry, { desc = "Open the diff for the selected entry." } }
 					},
 					file_history_panel = {
 						{ "n", "q", require("diffview.actions").close, { desc = "close diffview" } },

@@ -4,24 +4,11 @@ local M = {}
 function M:setup_lsp_essential(extra_mappings)
 	local mappings = {
 		n = {
-			-- ["<leader>ls"] = { vim.lsp.buf.signature_help },
-			-- ["<leader>vt"] = {
-			-- 	function()
-			-- 		local config = vim.diagnostic.config
-			-- 		config { virtual_text = not config().virtual_text }
-			-- 	end,
-			-- },
-			["<leader>cd"] = { vim.diagnostic.open_float },
 			["<leader>ra"] = { vim.lsp.buf.rename },
 			K = { vim.lsp.buf.hover },
 			["[d"] = { vim.diagnostic.goto_prev },
 			["]d"] = { vim.diagnostic.goto_next },
 			gD = { vim.lsp.buf.declaration },
-			-- gd = { vim.lsp.buf.definition },
-			-- ["<leader>D"] = { vim.lsp.buf.type_definition },
-			-- gi = { vim.lsp.buf.implementation },
-			-- gR = { vim.lsp.buf.references },
-			-- ["<leader>pr"] = { vim.diagnostic.setqflist },
 			gR = { "<CMD>Telescope lsp_references<CR>" },
 			gi = { "<CMD>Telescope lsp_implementations<CR>" },
 			gd = { "<CMD>Telescope lsp_definitions<CR>" },
@@ -35,14 +22,6 @@ function M:setup_lsp_essential(extra_mappings)
 			["<F12>"] = { vim.cmd.DapStepOut },
 			["<leader>bp"] = { vim.cmd.DapToggleBreakpoint },
 			["<leader>dr"] = { vim.cmd.DapToggleRepl },
-			-- ["<leader>lp"] = {
-			--     "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-			-- },
-			-- ["<leader>dl"] = { "<CMD>lua require'dap'.run_last()<CR>" },
-			-- ["<leader>B"] = {
-			-- 	"<CMD>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-			-- 	{ silent     = true },
-			-- },
 		},
 
 		[{ "n", "v" }] = {
@@ -78,7 +57,6 @@ M.ensure_installed = {
 		"marksman",
 		"pyright",
 		"texlab",
-		-- "sumneko_lua",
 		"lua_ls",
 		"svelte",
 		"tailwindcss",

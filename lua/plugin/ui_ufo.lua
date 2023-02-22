@@ -40,7 +40,7 @@ spec.keys = {
 
 function spec.config()
 	vim.opt.foldcolumn = "0"
-	vim.opt.foldenable = true
+	vim.opt.foldenable = false
 	vim.opt.foldlevel = 99
 	vim.opt.foldlevelstart = 99
 	require("ufo").setup {

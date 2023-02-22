@@ -15,14 +15,14 @@ return {
 				require("window-picker").setup {
 					autoselect_one = true,
 					include_current = false,
+          fg_color = "white",
+          other_win_hl_color = "black",
 					filter_rules = {
 						bo = {
 							filetype = { "neo-tree", "neo-tree-popup", "notify" },
 							buftype = { "terminal", "quickfix" },
 						},
 					},
-					fg_color = "white",
-					other_win_hl_color = "black",
 				}
 			end,
 		},
@@ -95,66 +95,4 @@ return {
 			},
 		},
 	},
-	--[[ "nvim-tree/nvim-tree.lua",
-	keys = {
-		{ "<leader>e", "<CMD>NvimTreeFindFileToggle<CR>" },
-	},
-	opts = {
-		view = {
-			width = {},
-			signcolumn = "auto",
-		},
-		renderer = {
-			icons = {
-				webdev_colors = false,
-				modified_placement = "after",
-				git_placement = "after",
-				glyphs = {
-					modified = "",
-					git = {
-						unstaged = "M",
-						staged = "M",
-						unmerged = "",
-						renamed = "R",
-						untracked = "U",
-						deleted = "D",
-						ignored = "I",
-					},
-				},
-			},
-			indent_width = 2,
-			indent_markers = {
-				enable = true,
-				inline_arrows = true,
-				icons = {
-					corner = "└",
-					edge = "│",
-					item = "│",
-					bottom = "─",
-					none = " ",
-				},
-			},
-		},
-		modified = {
-			enable = true,
-			show_on_dirs = false,
-			show_on_open_dirs = false,
-		},
-		git = {
-			show_on_dirs = false,
-			show_on_open_dirs = false,
-			ignore = true,
-		},
-		diagnostics = {
-			enable = true,
-			show_on_dirs = false,
-			show_on_open_dirs = false,
-			icons = {
-				hint = "H",
-				info = "I",
-				warning = "W",
-				error = "E",
-			},
-		},
-	}, ]]
 }

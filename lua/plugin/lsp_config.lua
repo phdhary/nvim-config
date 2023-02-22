@@ -2,7 +2,7 @@ local spec = {
 	"neovim/nvim-lspconfig",
 	event = "BufRead",
 	dependencies = {
-    "b0o/schemastore.nvim",
+		"b0o/schemastore.nvim",
 		{
 			"williamboman/mason.nvim",
 			name = "mason",

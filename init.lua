@@ -1,6 +1,5 @@
 Config = {
-	colorscheme = "zenwritten",
-	-- border = "solid",
+	colorscheme = "kanagawa",
 	border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },
 	lualine_auto_theme = true,
 	transparent = false,

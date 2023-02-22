@@ -3,7 +3,6 @@ local spec = {
 	event = "BufRead",
 	dependencies = {
 		"jay-babu/mason-null-ls.nvim",
-		"typescript.nvim",
 	},
 }
 

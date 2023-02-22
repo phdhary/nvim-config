@@ -2,7 +2,7 @@ return {
 	"akinsho/flutter-tools.nvim",
 	ft = "dart",
 	opts = {
-		fvm = true,
+		fvm = true, -- false if no fvm
 		ui = { border = Config.border, notification_style = "native" },
 		debugger = {
 			enabled = true,
@@ -30,8 +30,8 @@ return {
 			on_attach = function(_, _)
 				local mappings = {
 					n = {
-						["<leader>flc"] = { "<cmd> Telescope flutter commands <CR>" },
-						["<leader>flv"] = { "<cmd> Telescope flutter fvm <CR>" },
+						["<leader>flc"] = { "<cmd>Telescope flutter commands<CR>" },
+						["<leader>flv"] = { "<cmd>Telescope flutter fvm<CR>" },
 					},
 				}
 				require("user.lsp_utils"):setup_lsp_essential(mappings)

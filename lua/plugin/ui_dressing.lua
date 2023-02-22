@@ -8,24 +8,19 @@ return {
 			prompt_align = "left", -- Can be 'left', 'right', or 'center'
 			insert_only = false, -- When true, <Esc> will close the modal
 			border = Config.border,
-			win_options = {
-				winblend = 0, -- Window transparency (0-100)
-				wrap = false, -- Disable line wrapping
-			},
+			win_options = { winblend = 0, wrap = false },
 			get_config = function(opts)
 				return { min_width = string.len(opts.prompt) + 4 }
 			end,
 		},
 		select = {
-			enabled = true, -- Set to false to disable the vim.ui.select implementation
-			backend = { "builtin", "telescope", "fzf", "nui" }, -- Priority list of preferred vim.select implementations
+			enabled = true,
+			backend = { "builtin", "telescope", "fzf", "nui" },
 			builtin = {
 				anchor = "NW",
 				border = Config.border,
 				relative = "editor", -- 'editor' and 'win' will default to being centered
-				win_options = {
-					winblend = 0, -- Window transparency (0-100)
-				},
+				win_options = { winblend = 0 },
 			},
 			get_config = function(opts)
 				if opts.kind == "codeaction" then
