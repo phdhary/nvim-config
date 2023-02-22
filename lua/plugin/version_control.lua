@@ -55,6 +55,14 @@ return {
 				enhanced_diff_hl = true,
 				show_help_hints = false,
 				file_panel = { listing_style = "list" },
+				commit_log_panel = {
+					win_config = function()
+						local lines = vim.fn.getbufvar(0, "&lines")
+						local height = vim.fn.float2nr(lines * 0.6)
+						local cols = vim.fn.getbufvar(0, "&columns")
+						return { type = "float", border = Config.border, height = height, width = cols }
+					end,
+				},
 				keymaps = {
 					view = { { "n", "q", require("diffview.actions").close, { desc = "close diffview" } } },
 					file_panel = {
@@ -72,7 +80,15 @@ return {
 					},
 				},
 				hooks = {
-					diff_buf_read = function()
+					view_enter = function(view)
+						if view.panel.bufname == "DiffviewFileHistoryPanel" then
+							local min_height = 3
+							local max_height = 10
+							local lines = vim.fn.line "$"
+							local height = vim.fn.max { vim.fn.min { lines + 3, max_height }, min_height }
+							vim.api.nvim_win_set_height(0, height)
+							return
+						end
 						git:activate()
 					end,
 					view_leave = function()
