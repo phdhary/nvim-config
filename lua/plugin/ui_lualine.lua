@@ -24,17 +24,6 @@ opts.sections.lualine_a = {}
 opts.sections.lualine_b = {}
 opts.sections.lualine_c = {
 	{ "branch", icon = "", cond = is_more_than_minimal_width },
-	{
-		"filename",
-		path = 1,
-		newfile_status = true,
-		symbols = {
-			modified = "%#lualine_c_normal#" .. "⏺ ",
-			readonly = "%#lualine_c_diagnostics_error_normal#" .. " ",
-			unnamed = " [No Name] ",
-			newfile = "%#lualine_c_diagnostics_info_normal#" .. "[New] ",
-		},
-	},
 	{ "b:gitsigns_status" },
 	{ "diagnostics", symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" } },
 }
@@ -64,6 +53,7 @@ opts.sections.lualine_x = {
 		end,
 	},
 }
+opts.sections.lualine_y = {}
 opts.sections.lualine_z = {}
 
 opts.extensions.telescope = {
@@ -138,7 +128,7 @@ local function add_common_component(part)
 			return #vim.api.nvim_list_tabpages() > 1
 		end,
 	}
-	part.sections.lualine_y = { tabs }
+	part.sections.lualine_z = { tabs }
 	table.insert(part.sections.lualine_x, { "location", cond = is_more_than_minimal_width })
 	table.insert(part.sections.lualine_x, { "progress", cond = is_more_than_minimal_width })
 end
@@ -151,6 +141,37 @@ add_common_component(opts.extensions.quickfix)
 
 function spec.config()
 	opts.options.theme = (not Config.lualine_auto_theme and Config.colorscheme) or "auto"
+
+	local custom_filename = require("lualine.components.filename"):extend()
+	function custom_filename:init(options)
+		options = {
+			path = 1,
+			shorting_target = 0,
+			newfile_status = true,
+			symbols = {
+				modified = "%#lualine_c_normal#" .. "⏺ ",
+				readonly = "%#lualine_c_diagnostics_error_normal#" .. " ",
+				unnamed = " [No Name] ",
+				newfile = "%#lualine_c_diagnostics_info_normal#" .. "[New] ",
+			},
+		}
+		custom_filename.super.init(self, options)
+	end
+
+	function custom_filename:update_status()
+		local path = custom_filename.super.update_status(self)
+		local tail = vim.fn.fnamemodify(path, ":t")
+		if tail:match "DiffviewFile" or tail:match "spectre" then
+			return tail
+		end
+		if path:match "^diffview" or path:match "^fugitive" then
+			path = UserUtils.hide_long_path(path)
+		end
+		return path
+	end
+
+	table.insert(opts.sections.lualine_c, 2, custom_filename)
+
 	require("lualine").setup(opts)
 end
 
