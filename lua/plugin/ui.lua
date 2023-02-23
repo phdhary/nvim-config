@@ -79,7 +79,7 @@ return {
 			render = function(props)
 				local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":~:.") -- :t
 				if filename:match "^fugitive" then
-					filename = UserUtils.fugitive.hide_long_path(filename)
+					filename = UserUtils.hide_long_path(filename)
 				end
 				local ft_icon, ft_color = require("nvim-web-devicons").get_icon_color(filename)
 				local modified = vim.api.nvim_buf_get_option(props.buf, "modified") and "bold,italic" or "bold"

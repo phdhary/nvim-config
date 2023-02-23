@@ -97,10 +97,10 @@ function UserUtils.kitty.simple_name(name)
 		{ kitty_dark_theme = name .. "_dark", kitty_light_theme = name .. "_light" }
 end
 
-function UserUtils.fugitive.hide_long_path(fugitive_path)
-	local hidefugitive = fugitive_path:sub(12)
-	local hidehome = vim.fn.fnamemodify(hidefugitive, ":~")
-	return hidehome
+function UserUtils.hide_long_path(path)
+	path = path:sub(12)
+	path = vim.fn.fnamemodify(path, ":~:.")
+	return path
 end
 
 function UserUtils.fugitive.get_sid(file)
