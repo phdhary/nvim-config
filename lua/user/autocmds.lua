@@ -49,37 +49,38 @@ autos.BasicStuff.CursorHold = {
 autos.BasicStuff.ColorScheme = {
 	callback = function()
 		UserUtils.kitty:auto()
+		local set_hl = vim.api.nvim_set_hl
 		-- nvim-tree hl to neo-tree
-		vim.cmd [[
-    highlight! link NeoTreeDirectoryIcon NvimTreeFolderIcon
-    highlight! link NeoTreeDirectoryName NvimTreeFolderName
-    highlight! link NeoTreeSymbolicLinkTarget NvimTreeSymlink
-    highlight! link NeoTreeRootName NvimTreeRootFolder
-    highlight! link NeoTreeDirectoryName NvimTreeOpenedFolderName
-    highlight! link NeoTreeFileNameOpened NvimTreeOpenedFile
-    highlight! link LspInfoBorder FloatBorder
-    highlight! link NullLsInfoBorder FloatBorder
-    highlight! link HarpoonBorder FloatBorder
-    highlight! link HydraHint NormalFloat
-    highlight! link HydraBorder FloatBorder
-    highlight! HydraRed guifg=#ff5733
-    highlight! HydraBlue guifg=#5ebcf6
-    highlight! HydraAmaranth guifg=#ff1757
-    highlight! HydraTeal guifg=#00a1a1
-    highlight! HydraPink guifg=#ff55de
-    ]]
+		set_hl(0, "NeoTreeDirectoryIcon", { link = "NvimTreeFolderIcon" })
+		set_hl(0, "NeoTreeDirectoryIcon", { link = "NvimTreeFolderIcon" })
+		set_hl(0, "NeoTreeDirectoryName", { link = "NvimTreeFolderName" })
+		set_hl(0, "NeoTreeSymbolicLinkTarget", { link = "NvimTreeSymlink" })
+		set_hl(0, "NeoTreeRootName", { link = "NvimTreeRootFolder" })
+		set_hl(0, "NeoTreeDirectoryName", { link = "NvimTreeOpenedFolderName" })
+		set_hl(0, "NeoTreeFileNameOpened", { link = "NvimTreeOpenedFile" })
+		-- float border
+		set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
+		set_hl(0, "NullLsInfoBorder", { link = "FloatBorder" })
+		set_hl(0, "HarpoonBorder", { link = "FloatBorder" })
+		-- hydra
+		set_hl(0, "HydraHint", { link = "NormalFloat" })
+		set_hl(0, "HydraBorder", { link = "FloatBorder" })
+		set_hl(0, "HydraRed", { fg = "#ff5733" })
+		set_hl(0, "HydraBlue", { fg = "#5ebcf6" })
+		set_hl(0, "HydraAmaranth", { fg = "#ff1757" })
+		set_hl(0, "HydraTeal", { fg = "#00a1a1" })
+		set_hl(0, "HydraPink", { fg = "#ff55de" })
+
 		local colors = vim.g.colors_name
 		if colors:match ".*bones" or colors == "zenwritten" or colors == "zenburned" then
-			vim.cmd [[
-      highlight! Number gui=NONE 
-      highlight! Constant gui=NONE
-      highlight! String gui=NONE
-      highlight! Function gui=bold
-      highlight! link NormalFloat Normal
-      ]]
+			set_hl(0, "Function", { bold = true })
+			set_hl(0, "Number", {})
+			set_hl(0, "Constant", {})
+			set_hl(0, "String", {})
+			set_hl(0, "NormalFloat", { link = "Normal" })
 		end
 	end,
-	desc = "Kitty theme follow vim colorscheme or bg",
+	desc = "Auto kitty theme and adjust highlight",
 }
 
 autos.AlphaStuff.User = {
