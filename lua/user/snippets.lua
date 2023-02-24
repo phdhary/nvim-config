@@ -59,3 +59,14 @@ ls.add_snippets("lua", {
 		dscr = "stylua ignore",
 	}, { t { "-- stylua: ignore" } }),
 })
+
+ls.add_snippets("markdown", {
+	s({
+		trig = "ref",
+		dscr = "add bib reference",
+	}, {
+		t { "[@" },
+		i(1, "ref"),
+		t { "]" },
+	}),
+})
