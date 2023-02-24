@@ -123,19 +123,19 @@ function UserUtils.hydra.git(invoke_on_body)
 		heads = {
 			{
 				"J",
-        -- stylua: ignore
 				function()
-					if vim.wo.diff then return "]c" end
-					vim.schedule(function() gitsigns.next_hunk() end)
+					-- if vim.wo.diff then return "]c" end
+					-- vim.schedule(function() gitsigns.next_hunk() end)
+					gitsigns.next_hunk()
 					return "<Ignore>"
 				end,
 			},
 			{
 				"K",
-        -- stylua: ignore
 				function()
-					if vim.wo.diff then return "[c" end
-					vim.schedule(function() gitsigns.prev_hunk() end)
+					-- if vim.wo.diff then return "[c" end
+					-- vim.schedule(function() gitsigns.prev_hunk() end)
+					gitsigns.prev_hunk()
 					return "<Ignore>"
 				end,
 			},
