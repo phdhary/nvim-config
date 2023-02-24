@@ -19,6 +19,7 @@ return {
 		"vimwiki/vimwiki",
 		event = "BufRead",
 		init = function()
+			vim.g.vimwiki_global_ext = 0
 			vim.g.vimwiki_list = {
 				{
 					path = os.getenv "HOME" .. "/Documents/vimwiki/",
@@ -26,6 +27,14 @@ return {
 					ext = ".md",
 				},
 			}
+			vim.api.nvim_create_augroup("CustomVimWiki", {})
+			vim.api.nvim_create_autocmd("FileType", {
+				group = "CustomVimWiki",
+				pattern = "vimwiki",
+				callback = function()
+					vim.bo.ft = "markdown.vimwiki"
+				end,
+			})
 		end,
 	},
 	--[[ {
