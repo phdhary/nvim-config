@@ -17,17 +17,6 @@ function UserUtils.apply_mapping_table(mappings)
 	end
 end
 
----@param autos table
-function UserUtils.apply_autocmds(autos)
-	for augroup_name, autocmd_events in pairs(autos) do
-		vim.api.nvim_create_augroup(augroup_name, { clear = true })
-		for events, opts in pairs(autocmd_events) do
-			opts.group = augroup_name
-			vim.api.nvim_create_autocmd(events, opts)
-		end
-	end
-end
-
 function UserUtils.get_current_tab_detail()
 	local winlist = vim.api.nvim_tabpage_list_wins(0)
 	local result = {}

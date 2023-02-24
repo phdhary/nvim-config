@@ -1,34 +1,36 @@
-local autos = {
-	BasicStuff = {},
-	AlphaStuff = {},
-	MyExperimentalAutos = {},
-}
+local autocmd = vim.api.nvim_create_autocmd
+local group = "General"
+vim.api.nvim_create_augroup(group, { clear = false })
 
-autos.BasicStuff.TermOpen = {
+autocmd("TermOpen", {
+	group = group,
 	callback = function()
 		vim.opt_local.nu = false
 		vim.opt_local.rnu = false
 		vim.cmd "startinsert!"
 	end,
 	desc = "terminal things",
-}
+})
 
-autos.BasicStuff.TextYankPost = {
+autocmd("TextYankPost", {
+	group = group,
   -- stylua: ignore
   callback = function() vim.highlight.on_yank() end,
 	desc = "highlight on copy",
-}
+})
 
-autos.BasicStuff.FileType = {
+autocmd("FileType", {
+	group = group,
 	pattern = "checkhealth,git,help,spectre_panel,dap-float",
 	callback = function()
 		vim.keymap.set("n", "q", "ZQ", { buffer = true })
 	end,
 	desc = "Common Exit",
-}
+})
 
 AutoSaveFlag = false
-autos.BasicStuff.CursorHold = {
+autocmd("CursorHold", {
+	group = group,
 	pattern = "*.*",
 	callback = function()
     -- stylua: ignore
@@ -44,9 +46,10 @@ autos.BasicStuff.CursorHold = {
 		end
 	end,
 	desc = "autosaver",
-}
+})
 
-autos.BasicStuff.ColorScheme = {
+autocmd("ColorScheme", {
+	group = group,
 	callback = function()
 		UserUtils.kitty:auto()
 		local set_hl = vim.api.nvim_set_hl
@@ -81,27 +84,30 @@ autos.BasicStuff.ColorScheme = {
 		end
 	end,
 	desc = "Auto kitty theme and adjust highlight",
-}
+})
 
-autos.AlphaStuff.User = {
+autocmd("User", {
+	group = group,
 	pattern = "AlphaReady",
 	callback = function()
 		vim.opt.cmdheight = 0
 		vim.opt.laststatus = 0
 	end,
 	desc = "Disable Statusline in Alpha",
-}
+})
 
-autos.AlphaStuff.BufUnload = {
+autocmd("BufUnload", {
+	group = group,
 	pattern = "<buffer>",
 	callback = function()
 		vim.opt.cmdheight = 1
 		vim.opt.laststatus = 3
 	end,
 	desc = "Enable Statusline",
-}
+})
 
-autos.MyExperimentalAutos.FileType = {
+autocmd("FileType", {
+	group = group,
 	pattern = "fugitive,git",
 	callback = function(ctx)
 		if vim.bo.ft == "fugitive" then
@@ -123,15 +129,15 @@ autos.MyExperimentalAutos.FileType = {
 		end
 	end,
 	desc = "fugitive: open Diffview for the item under the cursor",
-}
+})
 
-autos.MyExperimentalAutos.BufEnter = {
+autocmd("BufEnter", {
+	group = group,
 	pattern = "*.arb",
 	callback = function()
 		if vim.bo.filetype ~= "json" then
 			vim.bo.filetype = "json"
 		end
 	end,
-}
-
-UserUtils.apply_autocmds(autos)
+	desc = "turn .arb to json ft",
+})
