@@ -22,12 +22,6 @@ return {
 		config = true,
 	},
 	{
-		"abecodes/tabout.nvim",
-		event = "BufRead",
-		opts = { enable_backwards = false },
-		dependencies = { "nvim-cmp", "nvim-treesitter" },
-	},
-	{
 		"windwp/nvim-spectre",
 		keys = {
 			{ "<leader>ss", vim.cmd.Spectre },

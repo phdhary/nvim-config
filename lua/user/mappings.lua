@@ -56,6 +56,10 @@ local mappings = {
 	t = {
 		["<C-e>"] = { [[<C-\><C-n>]] },
 	},
+	i = {
+		["<Tab>"] = { "<Right>" },
+		["<S-Tab>"] = { "<Left>" },
+	},
 }
 
 UserUtils.apply_mapping_table(mappings)
