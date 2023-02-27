@@ -41,6 +41,7 @@ local mappings = {
 		["<leader>bca"] = { "<CMD>%bd|e#<CR>" },
 		["<leader>qf"] = { vim.cmd.QuickfixToggle },
 		Q = { "<nop>" },
+		[",e"] = { ":e **/*<C-z><S-Tab>", },
 	},
 	[{ "i", "n" }] = {
 		["<C-s>"] = { vim.cmd.update },
