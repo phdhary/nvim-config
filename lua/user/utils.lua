@@ -108,6 +108,28 @@ end
 function UserUtils.hydra.git(invoke_on_body)
 	local Hydra = require "hydra"
 	local gitsigns = require "gitsigns"
+	local function go_to_hunk(next_or_prev)
+    -- stylua: ignore
+		if vim.wo.diff then return next_or_prev == "next" and "]c" or "[c" end
+		vim.schedule(function()
+			if next_or_prev == "next" then
+				gitsigns.next_hunk()
+			else
+				gitsigns.prev_hunk()
+			end
+		end)
+		return "<Ignore>"
+	end
+	local function stage_hunk()
+		local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
+		if mode == "V" then
+			local colon = vim.api.nvim_replace_termcodes(":", true, true, true)
+			vim.api.nvim_feedkeys(colon, "x", false)
+			vim.cmd "'<,'>Gitsigns stage_hunk"
+		else
+			vim.cmd "Gitsigns stage_hunk"
+		end
+	end
 	local opts = {
 		name = "git mode",
 		hint = [[_J_:next-hunk  _K_:prev-hunk  _S_tage-buffer  _s_tage-hunk  _u_ndo-stage  _p_review  toggle-_d_eleted  _b_lame  _B_lame-full  _r_eset-hunk  _<C-e>_exit]],
@@ -121,37 +143,11 @@ function UserUtils.hydra.git(invoke_on_body)
 		},
 		mode = { "n", "x" },
 		heads = {
-			{
-				"J",
-				function()
-					-- if vim.wo.diff then return "]c" end
-					-- vim.schedule(function() gitsigns.next_hunk() end)
-					gitsigns.next_hunk()
-					return "<Ignore>"
-				end,
-			},
-			{
-				"K",
-				function()
-					-- if vim.wo.diff then return "[c" end
-					-- vim.schedule(function() gitsigns.prev_hunk() end)
-					gitsigns.prev_hunk()
-					return "<Ignore>"
-				end,
-			},
-			{
-				"s",
-				function()
-					local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
-					if mode == "V" then
-						local esc = vim.api.nvim_replace_termcodes(":", true, true, true)
-						vim.api.nvim_feedkeys(esc, "x", false)
-						vim.cmd "'<,'>Gitsigns stage_hunk"
-					else
-						vim.cmd "Gitsigns stage_hunk"
-					end
-				end,
-			},
+      -- stylua: ignore
+			{ "J", function() return go_to_hunk "next" end, { expr = true } },
+      -- stylua: ignore
+			{ "K", function() return go_to_hunk "prev" end, { expr = true } },
+			{ "s", stage_hunk },
 			{ "u", gitsigns.undo_stage_hunk },
 			{ "S", gitsigns.stage_buffer },
 			{ "p", gitsigns.preview_hunk },
