@@ -15,8 +15,8 @@ function spec.config()
 		mode = "n",
 		body = "z",
 		heads = {
-			{ "h", "5zh", { desc = "←" } },
-			{ "l", "5zl", { desc = "→" } },
+			{ "h", "10zh", { desc = "←" } },
+			{ "l", "10zl", { desc = "→" } },
 			{ "H", "zH", { desc = "half screen ←" } },
 			{ "L", "zL", { desc = "half screen →" } },
 		},
