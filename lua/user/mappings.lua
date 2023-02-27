@@ -9,12 +9,10 @@ local mappings = {
 		["<C-w>m"] = {
 			function()
 				if isZoomed then
-					vim.cmd "vertical wincmd ="
-					vim.cmd "horizontal wincmd ="
+					vim.cmd "vertical wincmd =|horizontal wincmd ="
 					isZoomed = false
 				else
-					vim.cmd "resize"
-					vim.cmd "vertical resize"
+					vim.cmd "resize|vertical resize"
 					isZoomed = true
 				end
 			end,
