@@ -15,9 +15,34 @@ function spec.config()
 	-- local hover= b.hover
 	-- local completion= b.completion
 
+	local root_has_file = function(files)
+		return function(utils)
+			return utils.root_has_file(files)
+		end
+	end
+
+	local prettier_root_files = { ".prettierrc", ".prettierrc.js", ".prettierrc.json" }
+	local stylua_root_files = { "stylua.toml", ".stylua.toml" }
+
+	local opts = {
+		prettier = { condition = root_has_file(prettier_root_files) },
+		stylua = { condition = root_has_file(stylua_root_files) },
+		refactoring = {
+			runtime_condition = function(_)
+				local mode = vim.fn.mode()
+				return mode == "V" or mode == "v"
+			end,
+		},
+		gitsigns = {
+			runtime_condition = function()
+				return vim.wo.diff
+			end,
+		},
+	}
+
 	local sources = {
-		formatting.stylua,
-		formatting.prettierd,
+		formatting.stylua, -- .with(opts.stylua),
+		formatting.prettierd, -- .with(opts.prettier),
 		formatting.beautysh,
 		formatting.shellharden,
 		formatting.gofmt,
@@ -27,18 +52,8 @@ function spec.config()
 		-- formatting.rustywind, -- if no prettier-tailwind present
 		-- formatting.eslint_d,
 		-- code_actions.eslint,
-		code_actions.refactoring.with {
-			runtime_condition = function(_)
-				local mode = vim.fn.mode()
-				return mode == "V" or mode == "v"
-			end,
-		},
-		-- code_actions.gitsigns.with {
-		--     runtime_condition= function ()
-		--       local ft = vim.bo.ft
-		--       return ft =="diff"
-		--     end
-		--   },
+		code_actions.refactoring.with(opts.refactoring),
+		-- code_actions.gitsigns.with(opts.gitsigns),
 		code_actions.shellcheck,
 		-- diagnostics.eslint,
 		-- diagnostics.eslint_d,
