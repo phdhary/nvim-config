@@ -74,7 +74,7 @@ return {
 			window = {
 				padding = 0,
 				margin = { horizontal = 0, vertical = 1 },
-				zindex = 2,
+				zindex = 21,
 			},
 			render = function(props)
 				local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":~:.") -- :t
