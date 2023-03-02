@@ -61,7 +61,7 @@ return {
 			enabled = true,
 			use_treesitter = true,
 			show_current_context = true,
-			char = "┆",
+			-- char = "┆",
 			-- context_char = "┆",
 			-- show_current_context_start = true,
 		},
