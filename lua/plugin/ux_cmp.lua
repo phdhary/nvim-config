@@ -123,7 +123,15 @@ function spec.config()
 				winhighlight = "FloatBorder:FloatBorder",
 			},
 		},
-		experimental = { ghost_text = true },
+		performance = {
+			trigger_debounce_time = 500,
+			throttle = 550,
+			fetching_timeout = 80,
+		},
+		-- completion = {
+		-- 	keyword_length = 6,
+		-- },
+		-- experimental = { ghost_text = true },
 		mapping = cmp.mapping.preset.insert {
 			["<C-b>"] = cmp.mapping.scroll_docs(-4),
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
