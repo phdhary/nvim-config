@@ -1,5 +1,32 @@
 return {
 	{
+		"loctvl842/monokai-pro.nvim",
+		config = function()
+			local hp = require "monokai-pro.color_helper"
+			require("monokai-pro").setup {
+				override = function(c)
+					return {
+						FloatBorder = { bg = c.base.black, fg = c.base.dimmed5 },
+						DiffAdd = { fg = "NONE" },
+						DiffChange = { fg = "NONE" },
+						DiffDelete = { fg = "NONE" },
+						DiffText = {
+							bg = hp.blend(c.base.white, 0.05, c.diffEditor.modifiedLineBackground),
+							fg = "NONE",
+						},
+					}
+				end,
+			}
+		end,
+	},
+	{
+		"Mofiqul/vscode.nvim",
+		opts = {
+			transparent = Config.transparent,
+			italic_comments = true,
+		},
+	},
+	{
 		"mcchrish/zenbones.nvim",
 		config = function()
 			vim.g.bones_compat = 1

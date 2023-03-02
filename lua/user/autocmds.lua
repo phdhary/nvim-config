@@ -75,7 +75,7 @@ autocmd("ColorScheme", {
 		set_hl(0, "HydraPink", { fg = "#ff55de" })
 
 		local colors = vim.g.colors_name
-		if colors:match ".*bones" or colors == "zenwritten" or colors == "zenburned" then
+		if colors:match ".*bones" or colors == "zenwritten" or colors == "zenburned" or colors == "vscode" then
 			set_hl(0, "Function", { bold = true })
 			set_hl(0, "Number", {})
 			set_hl(0, "Constant", {})

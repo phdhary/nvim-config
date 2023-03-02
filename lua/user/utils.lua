@@ -79,6 +79,8 @@ UserUtils.kitty.map_colorscheme_with_kitty = {
 	nordbones = { kitty_dark_theme = "Nord", kitty_light_theme = "" },
 	forestbones = { kitty_dark_theme = "Everforest Dark Hard", kitty_light_theme = "Everforest Light Medium" },
 	zenburned = { kitty_dark_theme = "zenburned", kitty_light_theme = "" },
+	vscode = { kitty_dark_theme = "Vscode-dark", kitty_light_theme = "Vscode-light" },
+	["monokai-pro"] = { kitty_dark_theme = "Leaf Dark", kitty_light_theme = "" },
 }
 
 function UserUtils.kitty.simple_name(name)
