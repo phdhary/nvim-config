@@ -91,7 +91,7 @@ return {
 			require("rose-pine").setup(opts)
 		end,
 	},
-	{
+	--[[ {
 		"EdenEast/nightfox.nvim",
 		-- lazy = true,
 		opts = {
@@ -125,25 +125,25 @@ return {
 				},
 			},
 		},
-	},
-	{
+	}, ]]
+	--[[ {
 		"bluz71/vim-nightfly-colors",
 		-- lazy = true,
 		config = function()
 			vim.g.nightflyWinSeparator = 2
-			vim.g.nightflyNormalFloat = not Config.use_different_float_background
+			vim.g.nightflyNormalFloat = false
 			vim.g.nightflyTransparent = Config.transparent
 			vim.g.nightflyVirtualTextColor = false
 		end,
-	},
-	{
+	}, ]]
+	--[[ {
 		"bluz71/vim-moonfly-colors",
 		-- lazy = true,
 		config = function()
 			vim.g.moonflyWinSeparator = 2
-			vim.g.moonflyNormalFloat = not Config.use_different_float_background
+			vim.g.moonflyNormalFloat = false
 			vim.g.moonflyTransparent = Config.transparent
 			vim.g.moonflyVirtualTextColor = false
 		end,
-	},
+	}, ]]
 }
