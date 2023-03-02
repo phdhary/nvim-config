@@ -84,7 +84,7 @@ return {
 				local ft_icon, ft_color = require("nvim-web-devicons").get_icon_color(filename)
 				local modified = vim.api.nvim_buf_get_option(props.buf, "modified") and "bold,italic" or "bold"
 				local modified_symbol = vim.api.nvim_buf_get_option(props.buf, "modified") and " ⏺" or ""
-				local comment_hl = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID "Comment"), "fg#")
+				local comment_hl = UserUtils.get_color_from_hl("Comment", "fg")
 				return props.focused
 						and {
 							{ ft_icon, guifg = ft_color },

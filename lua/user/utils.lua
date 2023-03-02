@@ -94,6 +94,10 @@ function UserUtils.hide_long_path(path)
 	return path
 end
 
+function UserUtils.get_color_from_hl(hl_name, attr)
+	return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hl_name)), attr .. "#")
+end
+
 function UserUtils.fugitive.get_sid(file)
 	file = file or "autoload/fugitive.vim"
 	file = vim.api.nvim_exec("filter #vim-fugitive/" .. file .. "# scriptnames", true)
