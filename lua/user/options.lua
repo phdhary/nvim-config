@@ -20,6 +20,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 vim.opt.timeoutlen = 400
 vim.opt.wrap = false
+vim.opt.breakindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
