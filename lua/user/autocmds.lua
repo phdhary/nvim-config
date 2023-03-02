@@ -82,6 +82,15 @@ autocmd("ColorScheme", {
 			set_hl(0, "String", {})
 			set_hl(0, "NormalFloat", { link = "Normal" })
 		end
+		if colors == "nightfly" or colors == "moonfly" then
+			local normal_bg = UserUtils.get_color_from_hl("Normal", "bg")
+			local normal_float_bg = UserUtils.get_color_from_hl("NormalFloat", "bg")
+			local float_border_fg = UserUtils.get_color_from_hl("FloatBorder", "fg")
+			local comment_fg = UserUtils.get_color_from_hl("Comment", "fg")
+			set_hl(0, "FloatBorder", { bg = normal_float_bg, fg = float_border_fg })
+			set_hl(0, "TelescopeBorder", { bg = normal_bg, fg = float_border_fg })
+			set_hl(0, "LineNr", { fg = comment_fg })
+		end
 	end,
 	desc = "Auto kitty theme and adjust highlight",
 })
