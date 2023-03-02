@@ -75,19 +75,19 @@ return {
 				dark_variant = "main",
 				dim_nc_background = false,
 				disable_background = Config.transparent,
-				disable_float_background = not Config.use_different_float_background,
+				disable_float_background = false,
 				highlight_groups = {
 					["@variable"] = { italic = false },
-					-- ["@function"] = { bold = true },
 					["@function.builtin"] = { bold = true },
 					["@function.macro"] = { bold = true },
 					["@parameter"] = { italic = false, fg = "iris" },
-					-- ["@property"] = { italic = false, fg = "rose" },
+					FloatBorder = { bg = "surface", fg = "highlight_med" },
+					TelescopeBorder = { bg = "base", fg = "highlight_med" },
+					TelescopePromptNormal = { bg = "base", fg = "text" },
+					TelescopeTitle = { bg = "base", fg = "highlight_med" },
+					TelescopeNormal = { bg = "base", fg = "subtle" },
 				},
 			}
-			if Config.border == "solid" and Config.use_different_float_background then
-				opts.highlight_groups.FloatBorder = { bg = "surface" }
-			end
 			require("rose-pine").setup(opts)
 		end,
 	},
